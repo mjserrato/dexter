@@ -6,6 +6,9 @@
 
 <p align="center"><img src="https://raw.githubusercontent.com/piedcipher/dexter/master/screenshots/demo.gif?token=ADGVHWPTZP2ODKBM33RWPLC6C5QRA"></p>
 
+## Demo
+- https://flutter-dexter.surge.sh
+
 ## Screenshots
 <img src="https://raw.githubusercontent.com/piedcipher/dexter/master/screenshots/1.png?token=ADGVHWOW4NQ2H46PQH7P65S6C5QSY" />
 
