@@ -6,7 +6,7 @@ String viewModelGenerator({
   @required List<Widget> dynamicWidgets,
   @required String className,
 }) {
-  String output = 'import \'package:provider/provider.dart\';\n';
+  String output = 'import \'package:flutter/material.dart\';\n';
   output +=
       '\nclass ${className.isEmpty ? '_ClassName' : className} with ChangeNotifier {';
   output += dynamicWidgets.map(
