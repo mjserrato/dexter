@@ -15,8 +15,11 @@ void main() => runApp(
         ],
         child: kIsWeb
             ? MyApp()
-            : Material(
-                child: Text('Curretly only web is supported.'),
+            : Center(
+                child: Text(
+                  'Curretly only web is supported.',
+                  textDirection: TextDirection.ltr,
+                ),
               ),
       ),
     );
