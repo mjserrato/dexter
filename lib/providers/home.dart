@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:dexter/screens/home/widgets/textformfield.dart';
+import 'package:dexter/screens/home/widgets/custom_widget.dart';
+import 'package:dexter/screens/home/widgets/dropdown_formfield.dart';
 
 class HomeProvider with ChangeNotifier {
   //
@@ -15,11 +16,17 @@ class HomeProvider with ChangeNotifier {
 
   //
   List<Widget> _dynamicWidgets = [
-    TextFormFieldWidget(
+    CustomWidget(
       nameController: TextEditingController(),
       dataTypeController: TextEditingController(),
-      visibilityController: TextEditingController(),
-      rebuildController: TextEditingController(),
+      visibilityDropDown: DropdownButtonFormFieldWidget(
+        items: ['private', 'public'],
+        labelText: 'Visibility',
+      ),
+      rebuildDropDown: DropdownButtonFormFieldWidget(
+        items: ['Yes', 'No'],
+        labelText: 'Rebuild - notifyListeners();',
+      ),
       currentWidgetCount: '1',
     ),
   ];

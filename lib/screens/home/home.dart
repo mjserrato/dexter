@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:demoji/demoji.dart';
 
 import 'package:dexter/providers/home.dart';
-import 'package:dexter/screens/home/widgets/textformfield.dart';
+import 'package:dexter/screens/home/widgets/custom_widget.dart';
+import 'package:dexter/screens/home/widgets/dropdown_formfield.dart';
 import 'package:dexter/utils/generator.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -121,11 +122,19 @@ class HomeScreen extends StatelessWidget {
                             onPressed: () {
                               homeProvider.count++;
                               homeProvider.addDynamicWidget(
-                                TextFormFieldWidget(
+                                CustomWidget(
                                   nameController: TextEditingController(),
                                   dataTypeController: TextEditingController(),
-                                  visibilityController: TextEditingController(),
-                                  rebuildController: TextEditingController(),
+                                  visibilityDropDown:
+                                      DropdownButtonFormFieldWidget(
+                                    items: ['private', 'public'],
+                                    labelText: 'Visibility',
+                                  ),
+                                  rebuildDropDown:
+                                      DropdownButtonFormFieldWidget(
+                                    items: ['Yes', 'No'],
+                                    labelText: 'Rebuild - notifyListeners();',
+                                  ),
                                   currentWidgetCount:
                                       homeProvider.count.toString(),
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:dexter/screens/home/widgets/textformfield.dart';
+import 'package:dexter/screens/home/widgets/custom_widget.dart';
+import 'package:dexter/screens/home/widgets/dropdown_formfield.dart';
 
 String viewModelGenerator({
   @required List<Widget> dynamicWidgets,
@@ -8,22 +9,25 @@ String viewModelGenerator({
 }) {
   String output = 'import \'package:flutter/material.dart\';\n';
   output +=
-      '\nclass ${className.isEmpty ? '_ClassName' : className} with ChangeNotifier {';
+      '\nclass ${className.isEmpty ? 'ClassName' : className} with ChangeNotifier {';
   output += dynamicWidgets.map(
     (_dynamicWidget) {
-      TextFormFieldWidget dynamicWidget = _dynamicWidget;
-      final name =
-          (dynamicWidget.visibilityController.text == 'public' ? '' : '_') +
-              dynamicWidget.nameController.text;
+      CustomWidget dynamicWidget = _dynamicWidget;
+      final name = ((dynamicWidget.visibilityDropDown
+                      as DropdownButtonFormFieldWidget)
+                  .currentValue ==
+              'public'
+          ? '${(dynamicWidget.nameController.text.isEmpty ? '_' : dynamicWidget.nameController.text)}'
+          : '_${dynamicWidget.nameController.text}');
       final dataType = dynamicWidget.dataTypeController.text == ''
           ? 'dynamic'
           : dynamicWidget.dataTypeController.text;
       return '''
 \n    $dataType $name;
-${dynamicWidget.visibilityController.text != 'public' ? '''
+${(dynamicWidget.visibilityDropDown as DropdownButtonFormFieldWidget).currentValue != 'public' ? '''
 \n    $dataType get ${dynamicWidget.nameController.text} => this.$name;
 \n    set ${dynamicWidget.nameController.text}($dataType $name) {
-        this.$name = $name;${dynamicWidget.rebuildController.text == 'false' ? '' : '\n        notifyListeners();'}
+        this.$name = $name;${(dynamicWidget.rebuildDropDown as DropdownButtonFormFieldWidget).currentValue == 'No' ? '' : '\n        notifyListeners();'}
     }''' : ''}
 ''';
     },
